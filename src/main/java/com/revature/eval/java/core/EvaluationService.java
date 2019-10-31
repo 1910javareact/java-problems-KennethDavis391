@@ -140,7 +140,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		string.toUpperCase();
+		string = string.toUpperCase();
 		int score = 0;
 		for (int i = 0; i < string.length(); i++) {
 			if (string.charAt(i) == 'A' || string.charAt(i) == 'E' || string.charAt(i) == 'I' || string.charAt(i) == 'O' || string.charAt(i) == 'U'
