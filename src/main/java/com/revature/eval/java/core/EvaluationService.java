@@ -14,8 +14,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
+		int i;
+		char temp;
+		char[] charArray = string.toCharArray();
 		
-		return "";
+		for (i = 0; i < (charArray.length/2); i++) {
+			temp = charArray[i];
+			charArray[i] = charArray[(charArray.length - i - 1)];
+			charArray[(charArray.length - i - 1)] = temp;
+		}
+		
+		String reverseString = new String(charArray);
+		return reverseString;
 	}
 
 	/**
@@ -27,8 +37,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String threeLetterAcronym = "";
+		String[] phraseArr = phrase.split(" ");
+		
+		for (int i = 0; i < phraseArr.length; i++) {
+			threeLetterAcronym += (phraseArr[i].charAt(0));
+		}
+		
+		return threeLetterAcronym;
 	}
 
 	/**
@@ -81,18 +97,29 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.sideOne == this.sideTwo && this.sideOne == this.sideThree) {
+				return true;
+			}else {
+				return false;
+			}
+			
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.sideOne == this.sideTwo || this.sideTwo == this.sideThree || this.sideOne == this.sideThree) {
+				return true;
+			}else {
+				return false;
+			}
+			
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (this.sideOne == this.sideTwo || this.sideTwo == this.sideThree || this.sideOne == this.sideThree) {
+				return false;
+			}else {
+				return true;
+			}
 		}
 
 	}
