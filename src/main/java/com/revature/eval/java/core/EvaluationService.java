@@ -19,6 +19,7 @@ public class EvaluationService {
 		char temp;
 		char[] charArray = string.toCharArray();
 		
+		//swapping the first and last letter and continuing with the other letters and their corresponding pairs
 		for (i = 0; i < (charArray.length/2); i++) {
 			temp = charArray[i];
 			charArray[i] = charArray[(charArray.length - i - 1)];
@@ -38,14 +39,17 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		String threeLetterAcronym = "";
+		String firstLetterAcronym = "";
+		
+		//Separating the String into words
 		String[] phraseArr = phrase.split(" ");
 		
+		//taking the first letter of each word
 		for (int i = 0; i < phraseArr.length; i++) {
-			threeLetterAcronym += (phraseArr[i].charAt(0));
+			firstLetterAcronym += (phraseArr[i].charAt(0));
 		}
 		
-		return threeLetterAcronym;
+		return firstLetterAcronym;
 	}
 
 	/**
@@ -97,6 +101,7 @@ public class EvaluationService {
 			this.sideThree = sideThree;
 		}
 
+		//checking if all sides are equal
 		public boolean isEquilateral() {
 			if (this.sideOne == this.sideTwo && this.sideOne == this.sideThree) {
 				return true;
@@ -106,6 +111,7 @@ public class EvaluationService {
 			
 		}
 
+		//checking if at least two sides are equal
 		public boolean isIsosceles() {
 			if (this.sideOne == this.sideTwo || this.sideTwo == this.sideThree || this.sideOne == this.sideThree) {
 				return true;
@@ -115,6 +121,7 @@ public class EvaluationService {
 			
 		}
 
+		//checking if no sides are equal
 		public boolean isScalene() {
 			if (this.sideOne == this.sideTwo || this.sideTwo == this.sideThree || this.sideOne == this.sideThree) {
 				return false;
@@ -143,6 +150,8 @@ public class EvaluationService {
 	public int getScrabbleScore(String string) {
 		string = string.toUpperCase();
 		int score = 0;
+		
+		//cycling through the word to add the assigned values of the letters
 		for (int i = 0; i < string.length(); i++) {
 			if (string.charAt(i) == 'A' || string.charAt(i) == 'E' || string.charAt(i) == 'I' || string.charAt(i) == 'O' || string.charAt(i) == 'U'
 			|| string.charAt(i) == 'L' || string.charAt(i) == 'N' || string.charAt(i) == 'R' || string.charAt(i) == 'S' || string.charAt(i) == 'T') {
@@ -198,18 +207,26 @@ public class EvaluationService {
 	public String cleanPhoneNumber(String string) {
 		char[] inputNum = string.toCharArray();
 		String phoneNumber = "";
+		
+		//adding just the numbers input into a new string
 		for (int i = 0; i < inputNum.length; i++) {
 			if (inputNum[i] == '1' || inputNum[i] == '2' || inputNum[i] == '3' || inputNum[i] == '4' || inputNum[i] == '5'
 			|| inputNum[i] == '6' || inputNum[i] == '7' || inputNum[i] == '8' || inputNum[i] == '9' || inputNum[i] == '0') {
 				phoneNumber += inputNum[i];
 			}
 		}
+		
+		//removing country code if applicable
 		if(phoneNumber.charAt(0) == 1) {
 			phoneNumber = phoneNumber.substring(1);
 		}
+		
+		//checking to see if we still have a valid phone number
 		if(phoneNumber.length() != 10) {
 			throw new IllegalArgumentException();
 		}
+		
+		//checking that the numbers that can be from 2-9 are not 0 or 1
 		if(phoneNumber.charAt(0) == 1 || phoneNumber.charAt(0) == 0 || phoneNumber.charAt(3) == 1 || phoneNumber.charAt(3) == 0) {
 			throw new IllegalArgumentException();
 		}
@@ -229,14 +246,17 @@ public class EvaluationService {
 	public Map<String, Integer> wordCount(String string) {
 		Map<String, Integer> wordCount = new HashMap<>();
 		
+		//converting non-word characters to the same character for splitting
 		string = string.replaceAll(","," ");
 		string = string.replaceAll("\n", " ");
 		string = string.replaceAll(" +", " ");
 		
+		//splitting the string into individual words
 		String[] wordArr = string.split(" ");
 		
 		int counter;
 		
+		//counting the words
 		for ( String s : wordArr) {
 			if(wordCount.containsKey(s)) {
 				counter = wordCount.get(s) + 1;
@@ -325,8 +345,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] wordArr = string.split(" ");
+		
+		//converting to Pig Latin
+		for(String s : wordArr) {
+			
+		}
+		
+		//putting back into a single string
+		String wordString = "";
+		for(String s : wordArr) {
+			wordString += (" " + s);
+		}
+		wordString.trim();
+		return wordString;
 	}
 
 	/**
