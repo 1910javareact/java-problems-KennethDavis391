@@ -746,8 +746,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
+		String[] stringArr = string.split("");
+		String[] alphabetLowercase = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+		String[] alphabetUppercase = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+
+		//for each character cycle through the alphabet and check off the ones that we find
+		for(String s: stringArr) {
+			for(int i = 0; i < alphabetLowercase.length; i++) {
+				if(s.equals(alphabetLowercase[i]) || s.equals(alphabetUppercase[i])) {
+					alphabetLowercase[i] = null;
+					i = alphabetLowercase.length;
+				}
+			}
+		}
 		
-		return false;
+		//check if all letters have been checked off
+		for(String s: alphabetLowercase) {
+			if(s != null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
