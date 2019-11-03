@@ -693,8 +693,47 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String[] stringArr = string.split("");
+		int checkNum = 0;
+		
+		//this j will keep track of what number we are on
+		int j = 0;
+		
+		//checking the value of the Strings and doing some math based on what they are
+		for(int i = 0; i < stringArr.length; i++) {
+			if(stringArr[i].equals("1")) {
+				checkNum += (10 - j);
+			}else if(stringArr[i].equals("2")){
+				checkNum += (2 * (10 - j));
+			}else if(stringArr[i].equals("3")) {
+				checkNum += (3 * (10 - j));
+			}else if(stringArr[i].equals("4")) {
+				checkNum += (4 * (10 - j));
+			}else if(stringArr[i].equals("5")) {
+				checkNum += (5 * (10 - j));
+			}else if(stringArr[i].equals("6")) {
+				checkNum += (6 * (10 - j));
+			}else if(stringArr[i].equals("7")) {
+				checkNum += (7 * (10 - j));
+			}else if(stringArr[i].equals("8")) {
+				checkNum += (8 * (10 - j));
+			}else if(stringArr[i].equals("9")) {
+				checkNum += (9 * (10 - j));
+			}else if(stringArr[i].equals("0")) {
+			}else if(stringArr[i].equals("-")) {
+				j--;
+			}else if(stringArr[i].equals("X") && (i + 1) == stringArr.length) {
+				checkNum += 10;
+			}else {
+				return false;
+			}
+			j++;
+		}
+		if(checkNum % 11 == 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
