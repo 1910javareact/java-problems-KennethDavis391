@@ -480,8 +480,44 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
+			//setting up String arrays to sort through our messages
+			String[] alphabetLowercase = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+			String[] alphabetUppercase = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 			
-			return null;
+			//Separating the input string into a string array with an index for each character
+			String[] stringCharacters = string.split("");
+			
+			//identifying the letters and changing them
+			int newIndex = 0;
+			for (int i = 0; i < stringCharacters.length; i++) {
+				for (int j = 0; j < alphabetLowercase.length; j++) {
+					if(stringCharacters[i].equals(alphabetLowercase[j])) {
+						newIndex = j + this.key;
+						//looping back to the start of the alphabet
+						if(newIndex > 25) {
+							newIndex -= 26;
+						}
+						stringCharacters[i] = alphabetLowercase[newIndex];
+						j = alphabetLowercase.length;
+					}else if(stringCharacters[i].equals(alphabetUppercase[j])) {
+						newIndex = j + this.key;
+						//looping back to the start of the alphabet
+						if(newIndex > 25) {
+							newIndex -= 26;
+						}
+						stringCharacters[i] = alphabetUppercase[newIndex];
+						j = alphabetUppercase.length;
+					}
+				}
+			}
+			
+			//joining the array back into a single String
+			String codedString = "";
+			for (String s : stringCharacters) {
+				codedString += s;
+			}
+			
+			return codedString;
 		}
 
 	}
