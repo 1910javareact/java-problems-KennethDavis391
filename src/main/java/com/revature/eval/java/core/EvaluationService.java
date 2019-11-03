@@ -690,32 +690,16 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		String[] stringArr = string.split("");
-		int checkNum = 0;
+		Integer checkNum = 0;
 		
 		//this j will keep track of what number we are on
 		int j = 0;
 		
 		//checking the value of the Strings and doing some math based on what they are
 		for(int i = 0; i < stringArr.length; i++) {
-			if(stringArr[i].equals("1")) {
-				checkNum += (10 - j);
-			}else if(stringArr[i].equals("2")){
-				checkNum += (2 * (10 - j));
-			}else if(stringArr[i].equals("3")) {
-				checkNum += (3 * (10 - j));
-			}else if(stringArr[i].equals("4")) {
-				checkNum += (4 * (10 - j));
-			}else if(stringArr[i].equals("5")) {
-				checkNum += (5 * (10 - j));
-			}else if(stringArr[i].equals("6")) {
-				checkNum += (6 * (10 - j));
-			}else if(stringArr[i].equals("7")) {
-				checkNum += (7 * (10 - j));
-			}else if(stringArr[i].equals("8")) {
-				checkNum += (8 * (10 - j));
-			}else if(stringArr[i].equals("9")) {
-				checkNum += (9 * (10 - j));
-			}else if(stringArr[i].equals("0")) {
+			if(stringArr[i].equals("1") || stringArr[i].equals("2") || stringArr[i].equals("3") || stringArr[i].equals("4") || stringArr[i].equals("5") ||
+				stringArr[i].equals("6") || stringArr[i].equals("7") || stringArr[i].equals("8") || stringArr[i].equals("9") || stringArr[i].equals("0")) {
+				checkNum += (Integer.valueOf(stringArr[i]) * (10 - j));
 			}else if(stringArr[i].equals("-")) {
 				j--;
 			}else if(stringArr[i].equals("X") && (i + 1) == stringArr.length) {
@@ -847,8 +831,43 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		String[] stringArr = string.split("");
+		List<Integer> processedNum = new ArrayList<>();
+		int sumNum = 0;
+		
+		//make sure the string length is longer than one
+		if (stringArr.length <= 1) {
+			return false;
+		}
+		
+		//separate the numbers into a new array
+		for (String s: stringArr) {
+			if(s.equals("1") || s.equals("2") || s.equals("3") || s.equals("4") || s.equals("5") ||
+					s.equals("6") || s.equals("7") || s.equals("8") || s.equals("9") || s.equals("0")) {
+					processedNum.add(Integer.valueOf(s));
+			}else if(s.equals(" ")) {
+			}else {
+				return false;
+			}
+		}
+		
+		//change the numbers that need to be changed and add them up
+		for(int i = 0; i < processedNum.size(); i++) {
+			if(i % 2 == 1) {
+				processedNum.set(((processedNum.size() - 1) - i), (processedNum.get((processedNum.size() - 1) - i) * 2));
+				if(processedNum.get((processedNum.size() - 1) - i) > 9) {
+					processedNum.set(((processedNum.size() - 1) - i), (processedNum.get((processedNum.size() - 1) - i) - 9));
+				}
+			}
+			sumNum += processedNum.get(processedNum.size() - 1 - i);
+		}
+		
+		//final check
+		if (sumNum % 10 == 0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
