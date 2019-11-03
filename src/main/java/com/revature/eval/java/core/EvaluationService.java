@@ -424,8 +424,25 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> primeFactors = new ArrayList<>();
+		
+		//go through until all factors are found
+		while(l != 1) {
+			
+			//start at two and go up so you don't have to worry about getting factors that have factors
+			long i = 2;
+			
+			//loop until you find a factor
+			while(l % i != 0) {
+			i = i + 1L;
+			}
+			
+			//take the factor out and go again
+			l = l/i;
+			primeFactors.add(i);
+		}
+		
+		return primeFactors;
 	}
 
 	/**
@@ -463,7 +480,7 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
+			
 			return null;
 		}
 
