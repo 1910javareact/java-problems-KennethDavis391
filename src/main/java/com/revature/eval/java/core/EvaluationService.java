@@ -796,8 +796,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int sumNum = 0;
+		
+		//starting at 1 to avoid problems with 0 we cycle through the numbers and check if they have one of our set numbers as factors
+		for (int j = 1; j < i; j++) {
+			for (int k = 0; k < set.length; k++) {
+				if(j % set[k] == 0) {
+					sumNum += j;
+					k = set.length;
+				}
+			}
+		}
+		return sumNum;
 	}
 
 	/**
