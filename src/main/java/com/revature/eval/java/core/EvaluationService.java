@@ -575,6 +575,7 @@ public class EvaluationService {
 	 * An Atbash cipher for the Latin alphabet would be as follows:
 	 * 
 	 * Plain: abcdefghijklmnopqrstuvwxyz Cipher: zyxwvutsrqponmlkjihgfedcba It is a
+	 *        zyxwvutsrqponmlkjihgfedcba
 	 * very weak cipher because it only has one possible key, and it is a simple
 	 * monoalphabetic substitution cipher. However, this may not have been an issue
 	 * in the cipher's time.
@@ -596,8 +597,44 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String[] alphabetLowercase = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+			string = string.toLowerCase();
+			String[] stringArr = string.split("");
+			
+			int lettersCounter = 0;
+			String encodedString = "";
+			
+			//separating the letters and coding them
+			for(String s: stringArr) {
+				for(int i = 0; i < alphabetLowercase.length; i++) {
+					if(s.equals(alphabetLowercase[i])) {
+						
+						//separating into 5 letter groups
+						if (lettersCounter % 5 == 0 && lettersCounter != 0) {
+							encodedString += " ";
+						}
+						lettersCounter++;
+						
+						//reversing the letter and adding it to the code
+						int j = (25 - i);
+						encodedString += alphabetLowercase[j];
+					}
+				}
+				
+				//checking for numbers
+				if(s.equals("1") || s.equals("2") || s.equals("3") || s.equals("4") || s.equals("5") || s.equals("6") || s.equals("7") || s.equals("8") || s.equals("9") || s.equals("0")) {
+					
+					//separating into 5 letter groups
+					if (lettersCounter % 5 == 0 && lettersCounter != 0) {
+						encodedString += " ";
+					}
+					lettersCounter++;
+					
+					encodedString += s;
+				}
+				
+			}
+			return encodedString;
 		}
 
 		/**
