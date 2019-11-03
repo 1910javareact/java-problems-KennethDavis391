@@ -535,8 +535,32 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		if (i < 1) {
+			throw new IllegalArgumentException();
+		}
+		
+		//calculating primes, and stopping at the ith prime
+		int primeCounter = 0;
+		
+		//set potentailPrime and j to 2 to avoid issues with 0 and 1
+		int potentialPrime = 2;
+		//declaring j here to broaden its scope
+		int j;
+		while(primeCounter != i) {
+			
+			//loop to increment k until j is divisible by it
+			for( j = 2; potentialPrime % j != 0; j++);
+			if( potentialPrime == j ) {
+				primeCounter++;
+			}
+			potentialPrime++;
+		}
+		
+		//reverting the increment from the loop by one
+		potentialPrime--;
+		
+		return potentialPrime;
 	}
 
 	/**
