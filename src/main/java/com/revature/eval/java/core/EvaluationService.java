@@ -348,16 +348,31 @@ public class EvaluationService {
 		String[] wordArr = string.split(" ");
 		
 		//converting to Pig Latin
-		for(String s : wordArr) {
-			
+		for(int i = 0; i < wordArr.length; i++) {
+			if(wordArr[i].charAt(0) == 'a' || wordArr[i].charAt(0) == 'e' || wordArr[i].charAt(0) == 'i' || wordArr[i].charAt(0) == 'o' || wordArr[i].charAt(0) == 'u') {
+				wordArr[i] += "ay";
+				
+			//finding the first vowel except for qu and moving all letters before to the end and adding ay 
+			}else if(wordArr[i].charAt(0) != 'a' && wordArr[i].charAt(0) != 'e' && wordArr[i].charAt(0) != 'i' && wordArr[i].charAt(0) != 'o' && wordArr[i].charAt(0) != 'u') {
+				
+				if((wordArr[i].charAt(1) == 'a' || wordArr[i].charAt(1) == 'e' || wordArr[i].charAt(1) == 'i' || wordArr[i].charAt(1) == 'o' || wordArr[i].charAt(1) == 'u') && wordArr[i].charAt(0) != 'q') {
+					wordArr[i] = (wordArr[i].substring(1) + wordArr[i].substring(0,1) + "ay");
+					
+				}else if(wordArr[i].charAt(2) == 'a' || wordArr[i].charAt(2) == 'e' || wordArr[i].charAt(2) == 'i' || wordArr[i].charAt(2) == 'o' || wordArr[i].charAt(2) == 'u') {
+					wordArr[i] = (wordArr[i].substring(2) + wordArr[i].substring(0,2) + "ay");
+					
+				}else if(wordArr[i].charAt(3) == 'a' || wordArr[i].charAt(3) == 'e' || wordArr[i].charAt(3) == 'i' || wordArr[i].charAt(3) == 'o' || wordArr[i].charAt(3) == 'u') {
+					wordArr[i] = (wordArr[i].substring(3) + wordArr[i].substring(0,3) + "ay");
+				}
+			}
 		}
 		
 		//putting back into a single string
 		String wordString = "";
 		for(String s : wordArr) {
-			wordString += (" " + s);
+			wordString += (s + " ");
 		}
-		wordString.trim();
+		wordString = wordString.trim();
 		return wordString;
 	}
 
@@ -377,7 +392,11 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		//first we need to get the individual digits of the number
+		int temp = input;
+		while(temp != 0) {
+			
+		}
 		return false;
 	}
 
