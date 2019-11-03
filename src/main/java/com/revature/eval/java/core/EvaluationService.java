@@ -353,15 +353,11 @@ public class EvaluationService {
 				
 			//finding the first vowel except for qu and moving all letters before to the end and adding ay 
 			}else if(wordArr[i].charAt(0) != 'a' && wordArr[i].charAt(0) != 'e' && wordArr[i].charAt(0) != 'i' && wordArr[i].charAt(0) != 'o' && wordArr[i].charAt(0) != 'u') {
-				
-				if((wordArr[i].charAt(1) == 'a' || wordArr[i].charAt(1) == 'e' || wordArr[i].charAt(1) == 'i' || wordArr[i].charAt(1) == 'o' || wordArr[i].charAt(1) == 'u') && wordArr[i].charAt(0) != 'q') {
-					wordArr[i] = (wordArr[i].substring(1) + wordArr[i].substring(0,1) + "ay");
-					
-				}else if(wordArr[i].charAt(2) == 'a' || wordArr[i].charAt(2) == 'e' || wordArr[i].charAt(2) == 'i' || wordArr[i].charAt(2) == 'o' || wordArr[i].charAt(2) == 'u') {
-					wordArr[i] = (wordArr[i].substring(2) + wordArr[i].substring(0,2) + "ay");
-					
-				}else if(wordArr[i].charAt(3) == 'a' || wordArr[i].charAt(3) == 'e' || wordArr[i].charAt(3) == 'i' || wordArr[i].charAt(3) == 'o' || wordArr[i].charAt(3) == 'u') {
-					wordArr[i] = (wordArr[i].substring(3) + wordArr[i].substring(0,3) + "ay");
+				for(int j = 1; j < wordArr[i].length(); j++) {
+					if((wordArr[i].charAt(j) == 'a' || wordArr[i].charAt(j) == 'e' || wordArr[i].charAt(j) == 'i' || wordArr[i].charAt(j) == 'o' || wordArr[i].charAt(j) == 'u') && wordArr[i].charAt(j - 1) != 'q') {
+						wordArr[i] = (wordArr[i].substring(j) + wordArr[i].substring(0,j) + "ay");
+						j = wordArr[i].length();
+					}
 				}
 			}
 		}
@@ -750,7 +746,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
+		
 		return false;
 	}
 
