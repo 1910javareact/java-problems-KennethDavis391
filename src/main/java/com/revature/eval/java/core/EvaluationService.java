@@ -1,9 +1,8 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.lang.Math;
 
 public class EvaluationService {
 
@@ -393,11 +392,25 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		//first we need to get the individual digits of the number
-		int temp = input;
+		List<Integer> digits = new ArrayList<>();
+		Integer temp = new Integer(input);
 		while(temp != 0) {
-			
+			digits.add(temp % 10);
+			temp = ((temp - temp % 10)/10);
 		}
-		return false;
+		
+		//now we do the math
+		int newInt = 0;
+		for(Integer i : digits) {
+			newInt += (int) Math.pow(i, digits.size());
+		}
+		
+		//now we equate
+		if(newInt == input) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
