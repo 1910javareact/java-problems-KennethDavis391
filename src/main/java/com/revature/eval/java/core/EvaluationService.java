@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.*;
 import java.lang.Math;
@@ -307,7 +308,12 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
+			int i = sortedList.size()/2;
+			if (sortedList.get(i) == t) {
+				return i;
+			//}else if(t > sortedList.get(i)){
+				
+			}
 			return 0;
 		}
 
@@ -762,8 +768,10 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		given = given.plus(1000000000L, ChronoUnit.SECONDS);
+		
+		return given;
 	}
 
 	/**
@@ -904,15 +912,16 @@ public class EvaluationService {
 		String operatorGiven = "";
 		int answer = 0;
 		
+		//remove the ? and set secondNumGiven
+		stringArr[stringArr.length - 1] = stringArr[stringArr.length - 1].substring(0, stringArr[stringArr.length - 1].length() - 1);
+		secondNumGiven = Integer.valueOf(stringArr[stringArr.length - 1]);
+		
+		//find the firstNumGiven and operatorGiven
 		for(int i = 0; i < stringArr.length; i++) {
 			if(i == 2) {
 				firstNumGiven = Integer.valueOf(stringArr[i]);
 			}else if(i == 3) {
 				operatorGiven = stringArr[i];
-			}else if(i == 4 && !operatorGiven.equals("multiplied") && !operatorGiven.equals("divided")) {
-				secondNumGiven = Integer.valueOf(stringArr[i]);
-			}else if(i == 5) {
-				secondNumGiven = Integer.valueOf(stringArr[i]);
 			}
 		}
 		
@@ -925,7 +934,6 @@ public class EvaluationService {
 		}else if(operatorGiven.equals("divided")) {
 			answer = firstNumGiven / secondNumGiven;
 		}
-		
 		return answer;
 	}
 
