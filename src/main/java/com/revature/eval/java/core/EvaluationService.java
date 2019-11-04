@@ -898,8 +898,35 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		String[] stringArr = string.split(" ");
+		int firstNumGiven = 0;
+		int secondNumGiven = 0;
+		String operatorGiven = "";
+		int answer = 0;
+		
+		for(int i = 0; i < stringArr.length; i++) {
+			if(i == 2) {
+				firstNumGiven = Integer.valueOf(stringArr[i]);
+			}else if(i == 3) {
+				operatorGiven = stringArr[i];
+			}else if(i == 4 && !operatorGiven.equals("multiplied") && !operatorGiven.equals("divided")) {
+				secondNumGiven = Integer.valueOf(stringArr[i]);
+			}else if(i == 5) {
+				secondNumGiven = Integer.valueOf(stringArr[i]);
+			}
+		}
+		
+		if(operatorGiven.equals("plus")) {
+			answer = firstNumGiven + secondNumGiven;
+		}else if(operatorGiven.equals("minus")) {
+			answer = firstNumGiven - secondNumGiven;
+		}else if(operatorGiven.equals("multiplied")) {
+			answer = firstNumGiven * secondNumGiven;
+		}else if(operatorGiven.equals("divided")) {
+			answer = firstNumGiven / secondNumGiven;
+		}
+		
+		return answer;
 	}
 
 }
