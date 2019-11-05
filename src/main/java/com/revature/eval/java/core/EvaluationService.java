@@ -46,7 +46,12 @@ public class EvaluationService {
 		
 		//taking the first letter of each word
 		for (int i = 0; i < phraseArr.length; i++) {
-			firstLetterAcronym += (phraseArr[i].charAt(0));
+			firstLetterAcronym += (phraseArr[i].toUpperCase().charAt(0));
+			for (int j = 0; j < phraseArr[i].length(); j++) {
+				if (phraseArr[i].charAt(j) == '-' || phraseArr[i].charAt(j) == '_') {
+					firstLetterAcronym += (phraseArr[i].toUpperCase().charAt(j + 1));
+				}
+			}
 		}
 		
 		return firstLetterAcronym;
@@ -306,15 +311,23 @@ public class EvaluationService {
 	 */
 	static class BinarySearch<T> {
 		private List<T> sortedList;
-
-		public int indexOf(T t) {
-			int i = sortedList.size()/2;
-			if (sortedList.get(i) == t) {
-				return i;
-			//}else if(t > sortedList.get(i)){
-				
+		
+		public int binarySearch(int right, int left, T target) {
+			int mid = left + (right - left) / 2;
+			
+			if (sortedList.get(mid).equals(target)) {
+				return mid;
 			}
-			return 0;
+			
+			if ((int)sortedList.get(mid) < (int)target) {
+				return binarySearch(right, mid + 1, target);
+			}else {
+				return binarySearch(mid - 1, left, target);
+			}
+		}
+		
+		public int indexOf(T t) {			
+			return this.binarySearch(sortedList.size() - 1 , 0 , t);
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -770,6 +783,7 @@ public class EvaluationService {
 	public Temporal getGigasecondDate(Temporal given) {
 		
 		given = given.plus(1000000000L, ChronoUnit.SECONDS);
+		//this gives 2 successes, and 3 errors
 		
 		return given;
 	}
