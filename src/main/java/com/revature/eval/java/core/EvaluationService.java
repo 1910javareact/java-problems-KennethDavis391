@@ -313,12 +313,16 @@ public class EvaluationService {
 		private List<T> sortedList;
 		
 		public int binarySearch(int right, int left, T target) {
-			int mid = left + (right - left) / 2;
 			
+			//finding the middle of what's still left to search
+			int mid = left + ((right - left) / 2);
+			
+			//checking our exit condition
 			if (sortedList.get(mid).equals(target)) {
 				return mid;
 			}
 			
+			//removing half of the remaining list from our search based on the target value and middle value
 			if ((int)sortedList.get(mid) < (int)target) {
 				return binarySearch(right, mid + 1, target);
 			}else {
@@ -326,6 +330,7 @@ public class EvaluationService {
 			}
 		}
 		
+		//calls a different method with parameters that allow recusion
 		public int indexOf(T t) {			
 			return this.binarySearch(sortedList.size() - 1 , 0 , t);
 		}
